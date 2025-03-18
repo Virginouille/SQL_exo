@@ -104,10 +104,10 @@ SELECT * FROM user_pas_aigris;
  Il est ainsi possible de vérifier si une valeur est “égale”, “différente”, “supérieur”, 
  “supérieur ou égale”, “inférieur” ou “inférieur ou égale” pour au moins une des valeurs de la sous-requête.*/
 
-SELECT *
+SELECT age
 FROM user_aigris
 WHERE age > ANY (
-    SELECT *
+    SELECT age
     FROM user_pas_aigris
     WHERE age > 26
 )
@@ -115,10 +115,10 @@ WHERE age > ANY (
 /*ALL
 La commande ALL permet de comparer une valeur dans l'ensemble de valeurs d'une sous-requête. */
 
-SELECT *
+SELECT age
 FROM user_aigris
 WHERE age > ALL (
-    SELECT *
+    SELECT age
     FROM user_pas_aigris
     WHERE age > 26
 )

@@ -1,8 +1,16 @@
 /*Création/Modification/Suppression/Interet des index
 Sauvegarde / Restauration
-Les journaux (logs) de requêtes, erreurs, etc.
 
-Optimisation des requêtes(EXPLAIN)
+********Les journaux (logs) de requêtes, erreurs, etc.******
+
+Le journal des requêtes SQL implique l'enregistrement systématique des requêtes SQL exécutées 
+dans un système de base de données, permettant une analyse, un dépannage et une optimisation ultérieurs.
+
+Le journal des erreurs SQL Server contient des événements définis par l'utilisateur et certains événements système
+ que vous pouvez utiliser pour le dépannage
+
+
+*******Optimisation des requêtes(EXPLAIN)****
 L'optimisation de requête est une opération dans laquelle plusieurs plans d'exécution d'une requête SQL 
 sont examinés pour en sélectionner le meilleur. L'estimation de leurs coûts dépend du temps d'exécution 
 et du nombre de ressources utilisées pour y parvenir, elle se mesure en entrées-sorties.

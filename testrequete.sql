@@ -29,29 +29,32 @@ SQL :
 
 
 /*INTERSECT
-SELECT * FROM `table1`
-INTERSECT
-SELECT * FROM `table2`
 La commande SQL INTERSECT permet d’obtenir l’intersection des résultats de 2 requêtes. Cette commande permet donc de récupérer les enregistrements communs à 2 requêtes. Cela peut s’avérer utile lorsqu’il faut trouver s’il y a des données similaires sur 2 tables distinctes.
 pour l’utiliser convenablement il faut que les 2 requêtes retourne le même nombre de colonnes, avec les mêmes types et dans le même ordre.
 */
 
-CREATE TABLE utilisateur1;
-
-CREATE TABLE utilisateur2;
-
-INSERT INTO utilisateur1 (id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE utilisateur1 (id_utilisateur1 INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100),
     prenom VARCHAR(100),
-    age INT,) 
+    age INT);
+
+CREATE TABLE utilisateur2 (id_utilisateur2 INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(100),
+    prenom VARCHAR(100),
+    age INT);
+
+INSERT INTO utilisateur1 (id_utilisateur1,
+    nom,
+    prenom,
+    age) 
     VALUES (1, 'Guillet', 'Vincent', 26),(2, 'Gay', 'Virginie', 34),(3, 'Petit', 'Martin', 26);
 
 
-INSERT INTO utilisateur2(id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(100),
-    prenom VARCHAR(100),
-    age INT,) 
-    VALUES (1, 'Aled', 'Alice', 29),(2, 'Lapin', 'Garen', 60),(3, 'Oskour', 'Jeanne', 96);
+INSERT INTO utilisateur2(id_utilisateur2,
+    nom,
+    prenom,
+    age) 
+    VALUES (1, 'Aled', 'Alice', 29),(2, 'Lapin', 'Garen', 60),(3, 'Petit', 'Martin', 26);
 
 SELECT * FROM utilisateur1
 INTERSECT
@@ -65,23 +68,32 @@ A savoir : cette commande s’appelle différemment selon les Systèmes de Gesti
 EXCEPT : PostgreSQL
 MINUS : MySQL et Oracle
 */
-CREATE TABLE user_aigris;
-
-CREATE TABLE user_pas_aigris;
-
-INSERT INTO user_aigris (id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE utilisateur1 (id_utilisateur1 INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100),
     prenom VARCHAR(100),
-    age INT,) 
-    VALUES (1, 'Aled', 'Alice', 29),(2, 'Lapin', 'Garen', 60),(3, 'Petit', 'Martin', 26),(4, 'Guillet', 'Vincent', 26),(5, 'Gay', 'Virginie', 34),(6, 'Oskour', 'Jeanne', 96);
+    age INT);
 
-
-INSERT INTO user_pas_aigris(id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE utilisateur2 (id_utilisateur2 INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100),
     prenom VARCHAR(100),
-    age INT,) 
-    VALUES (2, 'Lapin', 'Garen', 60),(4, 'Guillet', 'Vincent', 26),(5, 'Gay', 'Virginie', 34);
+    age INT);
 
-SELECT * FROM user_aigris
-EXCEPT
-SELECT * FROM user_pas_aigris;
+INSERT INTO utilisateur1 (id_utilisateur1,
+    nom,
+    prenom,
+    age) 
+    VALUES (1, 'Guillet', 'Vincent', 26),(2, 'Gay', 'Virginie', 34),(3, 'Petit', 'Martin', 26);
+
+
+INSERT INTO utilisateur2(id_utilisateur2,
+    nom,
+    prenom,
+    age) 
+    VALUES (1, 'Aled', 'Alice', 29),(2, 'Lapin', 'Garen', 60),(3, 'Petit', 'Martin', 26);
+
+SELECT * FROM utilisateur1
+INTERSECT
+SELECT * FROM utilisateur2;
+
+/*OVER Elle permet de calculer des valeurs agrégées telles que la moyenne, la somme, le comptage, etc., sur des sous-ensembles de données spécifiés par la clause PARTITION BY
+, RANK, ROW_NUMBER*/

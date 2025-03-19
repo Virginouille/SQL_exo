@@ -29,9 +29,6 @@ SQL :
 
 
 /*INTERSECT
-SELECT * FROM `table1`
-INTERSECT
-SELECT * FROM `table2`
 La commande SQL INTERSECT permet d’obtenir l’intersection des résultats de 2 requêtes. Cette commande permet donc de récupérer les enregistrements communs à 2 requêtes. Cela peut s’avérer utile lorsqu’il faut trouver s’il y a des données similaires sur 2 tables distinctes.
 pour l’utiliser convenablement il faut que les 2 requêtes retourne le même nombre de colonnes, avec les mêmes types et dans le même ordre.
 */
@@ -122,3 +119,32 @@ WHERE age > ALL (
     FROM user_pas_aigris
     WHERE age > 26
 )
+
+/*Case
+Dans le langage SQL, la commande “CASE … WHEN …” permet d’utiliser des conditions de type “si / sinon” (cf. if / else) similaire à un langage de programmation pour retourner un résultat disponible entre plusieurs possibilités. Le CASE peut être utilisé dans n’importe quelle instruction ou clause, telle que SELECT, UPDATE, DELETE, WHERE, ORDER BY ou HAVING.
+L’utilisation du CASE est possible de 2 manières différentes :
+
+Comparer une colonne à un set de résultat possible
+Élaborer une série de conditions booléennes pour déterminer un résultat
+ la condition ELSE est facultative et sert de ramasse-miette. Si les conditions précédentes ne sont pas respectées alors ce sera la valeur du ELSE qui sera retournée par défaut.
+*/
+
+CREATE TABLE etat_aigris (id_etat_aigris INT PRIMARY KEY AUTO_INCREMENT,
+nom VARCHAR(100),
+prenom VARCHAR(100),
+etat VARCHAR(50);
+
+INSERT INTO etat_aigris (id_etat_aigris, nom, prenom, etat) VALUES
+(1,'Petit','Martin','Aigris'),(2,'Gay','Virginie','Moyennement_Aigris'),(3,'Guillet','Vincent','Pas_aigris');
+
+SELECT id_etat_aigris, nom, prenom, etat, 
+    CASE 
+      WHEN etat='Aigris' THEN 'cette personne est aigris'
+      WHEN etat='Moyennement_Aigris' THEN 'cette personne est aigris mais pas trop'
+      ELSE 'cette personne est chill'
+    END
+FROM etat_aigris;
+
+/*transaction
+Une transaction commence avec l'instruction BEGIN TRANSACTION et se termine par une instruction COMMIT ou ROLLBACK
+*/
